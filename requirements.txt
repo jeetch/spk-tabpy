@@ -1,3 +1,28 @@
 # installs dependencies from ./setup.py, and the package itself,
 # in editable mode
--e .
+# -e .
+
+cloudpickle
+configparser
+coverage
+coveralls
+docopt
+future
+genson
+hypothesis
+jsonschema
+mock
+nltk
+numpy
+pandas
+pyopenssl
+pytest
+pytest-cov
+requests
+scipy
+simplejson
+sklearn
+textblob
+tornado
+twisted
+urllib3
