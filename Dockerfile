@@ -1,14 +1,15 @@
-FROM python:3
+FROM python:3.7-slim-buster
 
-WORKDIR /app
+RUN apt-get update \
+    && apt-get install -y build-essential python3-dev \
+    && pip install tabpy \
+    && mkdir -p /opt/tabpy
 
-# install the latest TabPy
-RUN python3 -m pip install --upgrade pip && python3 -m pip install --upgrade tabpy
+WORKDIR /opt/tabpy
+COPY tabpy.conf .
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-# start TabPy
-CMD ["sh", "-c", "tabpy"]
+EXPOSE 9004
 
-# run startup script
-ADD start.sh /
-RUN chmod +x /start.sh
-CMD ["/start.sh"]
+CMD ["tabpy", "serve", "--config", "tabpy.conf", "--port", "9004", "--no-ssl"]
